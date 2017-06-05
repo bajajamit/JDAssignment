@@ -1,0 +1,24 @@
+/* Styles go here */
+
+.selected {
+  color: black;
+  font-weight: bold;
+}
+
+.h1,
+h1 {
+  text-align: center; 
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+th > a:link {
+  color: white;
+}
+
+th > a:visited {
+  color: white;
+} 

@@ -1,0 +1,28 @@
+<table class="table table-striped table-hover table-bordered" ng-if="grid.gridData">
+  <thead>
+    <tr>
+      <th ng-repeat="column in grid.gridColumns">
+        <a href="#" ng-click="grid.sortBy(column)">{{column | uppercase}}</a>
+        <i ng-show="grid.sortColumn === column" ng-class="{'glyphicon glyphicon-arrow-up': !grid.reverse, 'glyphicon glyphicon-arrow-down': grid.reverse }" class="glyphicon glyphicon-arrow-up"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-click="grid.onRowSelected(row)" ng-class="{'selected success': row.id === grid.selectedRow.id}" ng-repeat="row in grid.rows track by row.id">
+      <td ng-repeat="column in grid.gridColumns">{{row[column]}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td style="text-align:center;" colspan="{{grid.gridColumns.length}}">
+        <div>
+          <button type="button" class="btn btn-default" ng-disabled="grid.pager.currentPage === 1" ng-click="grid.setPage(1)" ng-if="grid.pager.totalPages > 1">First</button>
+          <button type="button" class="btn btn-default" ng-disabled="grid.pager.currentPage === 1" ng-click="grid.setPage(grid.pager.currentPage - 1)" ng-if="grid.pager.totalPages > 1">Prev</button>
+          <span> Page {{grid.pager.currentPage}} of {{grid.pager.totalPages}} </span>
+          <button type="button" class="btn btn-default" ng-disabled="grid.pager.totalPages === grid.pager.currentPage" ng-click="grid.setPage(grid.pager.currentPage + 1)" ng-if="grid.pager.totalPages > 1">Next</button>
+          <button type="button" class="btn btn-default" ng-disabled="grid.pager.totalPages === grid.pager.currentPage" ng-click="grid.setPage(grid.pager.totalPages)" ng-if="grid.pager.totalPages > 1">Last</button>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>

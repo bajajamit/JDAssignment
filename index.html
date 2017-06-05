@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script data-require="angular.js@1.3.20" data-semver="1.3.20" src="https://code.angularjs.org/1.3.20/angular.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js"></script>
+  <script src="services/societyDataService.js"></script>
+  <script src="services/paginationService.js"></script>
+  <script src="member-details/member-details.js"></script>
+  <script src="sm-grid/sm-grid.js"></script>
+</head>
+
+<body ng-app="societyApp">
+  <h1>UX Society Members</h1>
+  <div class="container-fluid" ng-controller="societyCtrl as ctrl">
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+          <i class="glyphicon glyphicon-search"></i>
+        </span>
+      <input id="txtSearch" type="text" class="form-control" placeholder="Search" ng-model="searchText" />
+    </div>
+    
+    <div style="margin-left:-15px; margin-top:15px;">
+      <div class="col-sm-8">
+        <span ng-if="!ctrl.ready">Loading, Please wait...</span>
+        <sm-grid ng-if="ctrl.ready"
+            grid-data="ctrl.model" 
+            grid-columns="['name', 'occupation', 'company']"
+            on-row-clicked="ctrl.onRowClicked(row)">
+        </sm-grid>
+      </div>
+      <div ng-if="ctrl.selectedRow" class="col-sm-4 well">
+        <member-details member="ctrl.selectedRow"></member-details>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
